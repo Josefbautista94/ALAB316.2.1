@@ -18,28 +18,31 @@ bttn.style.borderRadius = "50px"; // Rounded corners
 bttn.innerHTML = "<h1>Start<br> Game</h1>"; // giving mainEl a h1
 bttn.style.color = "white";
 bttn.style.border = "10px solid rgb(200, 195, 209)";
+bttn.onclick = startGame; // This will call startGame() when clicked
+
 mainEl.appendChild(bttn);
 
 let words = ["apples", "water", "elephant","racecar","drums","phone"];
-let scramble = []
+let original = [...words]
 
+function scrambleWords (word){
+let split = ""
+}
 
-bttn.addEventListener("click", () => {
-    let randomWord = words[Math.floor(Math.random()*words.length)]
-    alert(`Can you get this word right : ${randomWord}`)
-    let userInput = window.prompt("What word do you think it is ? 👀")
-    if (userInput) {// If the user wrote something down
+function startGame() {
+    let randomWord = words[Math.floor(Math.random() * words.length)];
+    alert(`Can you get this word right: ${randomWord}`);
+
+    let userInput = window.prompt("What word do you think it is? 👀");
+
+    if (userInput) { // If the user wrote something
         if (userInput.toLowerCase() === randomWord) {
-            alert(`You guessed the word right! ✅`)
+            alert("You guessed the word right! ✅");
+        } else {
+            alert("Wrong Answer!");
         }
-        else {
-            alert(`Wrong Answer!`)
-        }
-
+    } else {
+        alert("You didn’t write anything.");
     }
-    else {
-        alert(`You didnt't write anything`)
-    }
-});
-
+}
 
