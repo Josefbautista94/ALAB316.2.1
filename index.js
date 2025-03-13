@@ -20,7 +20,6 @@ bttn.innerText = "Start Game"; // Fixed innerHTML issue
 bttn.style.color = "white";
 bttn.style.border = "10px solid rgb(200, 195, 209)";
 bttn.onclick = startGame; // This will call startGame() when clicked
-
 mainEl.appendChild(bttn);
 
 // Word list
@@ -61,21 +60,22 @@ console.log(scrambleWords(words[Math.floor(Math.random() * words.length)])); // 
 
 // Start game function
 function startGame() {
-    let randomIndex = Math.floor(Math.random() * words.length);
-    let chosenWord = words[randomIndex]; // Pick a random word
-    let scrambledWord = scrambleWords(chosenWord); // Scramble it
+    let randomIndex = Math.floor(Math.random() * words.length);  // Generate a random index between 0 and words.length - 1 to select a word from the array.
 
-    alert(`Can you unscramble this word: ${scrambledWord}`);
+    let chosenWord = words[randomIndex]; // Pick a random word according to the number we got in random index for example If words = ["apple", "water", "elephant", "racecar", "drums", "phone"], let chosenWord = words[4]; // "drums"
+    let scrambledWord = scrambleWords(chosenWord); // Scrambles the word with the function we created earlier, example output: "sdrum"
 
-    let userInput = window.prompt(`Current Word : ${scrambledWord}, What word do you think it might be? 👀`);
+    alert(`Can you unscramble this word: ${scrambledWord}`); //Using alert to display the scrambled word
 
-    if (userInput) { // If the user wrote something
+    let userInput = window.prompt(`Current Word : ${scrambledWord}, What word do you think it might be? 👀`); // prompt that shows after the alert where the user can write an input
+
+    if (userInput) { // Check if the user provided an input and prevents empty answers or canceling.
         if (userInput.toLowerCase() === chosenWord) { // Compare with original
             alert("You guessed the word right! ✅");
         } else {
             alert("Wrong Answer!");
         }
     } else {
-        alert("You didn’t write anything!");
+        alert("You didn’t write anything!"); // returns if the first if statement is false
     }
 }
