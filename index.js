@@ -2,7 +2,13 @@
 
 let mainEl = document.querySelector("body");
 
-mainEl.style.background = "linear-gradient(#001F3F, #1A2A6C)";
+// Adding Google Fonts link to load "Bungee"
+let fontLink = document.createElement("link");
+fontLink.href = "https://fonts.googleapis.com/css2?family=Bungee&display=swap";
+fontLink.rel = "stylesheet";
+document.head.appendChild(fontLink);
+
+mainEl.style.background = "linear-gradient(#001F3F,rgb(14, 53, 213))";
 mainEl.style.height = "100vh"; // Full viewport height
 mainEl.style.margin = "0";
 mainEl.style.backgroundSize = "cover";
@@ -14,13 +20,16 @@ mainEl.style.flexDirection = "column"; // Stacks items vertically
 // Create the button
 let bttn = document.createElement("button");
 bttn.style.padding = "5em 10em";
-bttn.style.background = "rgb(197, 130, 58)";
-bttn.style.borderRadius = "50px"; // Rounded corners
-bttn.innerText = "Start Game"; // Fixed innerHTML issue
+bttn.style.background = "rgb(255, 132, 0)";
+bttn.style.borderRadius = "50px"; 
+bttn.innerHTML = "<h1>Start <br> Game</h1>"; 
 bttn.style.color = "white";
 bttn.style.border = "10px solid rgb(200, 195, 209)";
+bttn.style.fontFamily = "'Bungee', sans-serif"; 
 bttn.onclick = startGame; // This will call startGame() when clicked
 mainEl.appendChild(bttn);
+
+
 
 // Word list
 let words = ["apples", "water", "elephant", "racecar", "drums", "phone"]; // creating a random array of words 
