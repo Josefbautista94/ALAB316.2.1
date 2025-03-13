@@ -1,6 +1,5 @@
 // Create your game here!
 
-let mainEl = document.querySelector("body");
 
 // Adding Google Fonts link to load "Bungee"
 let fontLink = document.createElement("link");
@@ -8,6 +7,7 @@ fontLink.href = "https://fonts.googleapis.com/css2?family=Bungee&display=swap";
 fontLink.rel = "stylesheet";
 document.head.appendChild(fontLink);
 
+let mainEl = document.querySelector("body");
 mainEl.style.background = "linear-gradient(#001F3F,rgb(14, 53, 213))";
 mainEl.style.height = "100vh"; // Full viewport height
 mainEl.style.margin = "0";
@@ -29,6 +29,14 @@ bttn.style.fontFamily = "'Bungee', sans-serif";
 bttn.onclick = startGame; // This will call startGame() when clicked
 mainEl.appendChild(bttn);
 
+//Displays the last guess
+let displayDiv = document.getElementById("app")
+let progressText = document.createElement('p')
+progressText.style.color = "white"
+progressText.style.fontSize = "30px"
+progressText.style.fontFamily = "'Bungee', sans-serif"; 
+progressText.innerText = "Last Guess: None";
+displayDiv.appendChild(progressText)
 
 
 // Word list
@@ -77,6 +85,9 @@ function startGame() {
     alert(`Can you unscramble this word: ${scrambledWord}`); //Using alert to display the scrambled word
 
     let userInput = window.prompt(`Current Word : ${scrambledWord}, What word do you think it might be? 👀`); // prompt that shows after the alert where the user can write an input
+
+       //Updates progressText here after user enters a guess
+        progressText.innerText = `Last Guess: ${userInput ? userInput : "None"}`;
 
     if (userInput) { // Check if the user provided an input and prevents empty answers or canceling.
         if (userInput.toLowerCase() === chosenWord) { // Compare with original
