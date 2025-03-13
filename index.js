@@ -1,8 +1,14 @@
 // Create your game here!
 
-let mainEl = document.querySelector("body");
 
-mainEl.style.background = "linear-gradient(#001F3F, #1A2A6C)";
+// Adding Google Fonts link to load "Bungee"
+let fontLink = document.createElement("link");
+fontLink.href = "https://fonts.googleapis.com/css2?family=Bungee&display=swap";
+fontLink.rel = "stylesheet";
+document.head.appendChild(fontLink);
+
+let mainEl = document.querySelector("body");
+mainEl.style.background = "linear-gradient(#001F3F,rgb(14, 53, 213))";
 mainEl.style.height = "100vh"; // Full viewport height
 mainEl.style.margin = "0";
 mainEl.style.backgroundSize = "cover";
@@ -14,14 +20,24 @@ mainEl.style.flexDirection = "column"; // Stacks items vertically
 // Create the button
 let bttn = document.createElement("button");
 bttn.style.padding = "5em 10em";
-bttn.style.background = "rgb(197, 130, 58)";
-bttn.style.borderRadius = "50px"; // Rounded corners
-bttn.innerText = "Start Game"; // Fixed innerHTML issue
+bttn.style.background = "rgb(255, 132, 0)";
+bttn.style.borderRadius = "50px"; 
+bttn.innerHTML = "<h1>Start <br> Game</h1>"; 
 bttn.style.color = "white";
 bttn.style.border = "10px solid rgb(200, 195, 209)";
+bttn.style.fontFamily = "'Bungee', sans-serif"; 
 bttn.onclick = startGame; // This will call startGame() when clicked
-
 mainEl.appendChild(bttn);
+
+//Displays the last guess
+let displayDiv = document.getElementById("app")
+let progressText = document.createElement('p')
+progressText.style.color = "white"
+progressText.style.fontSize = "30px"
+progressText.style.fontFamily = "'Bungee', sans-serif"; 
+progressText.innerText = "Last Guess: None";
+displayDiv.appendChild(progressText)
+
 
 // Word list
 let words = ["apples", "water", "elephant", "racecar", "drums", "phone"]; // creating a random array of words 
@@ -61,21 +77,25 @@ console.log(scrambleWords(words[Math.floor(Math.random() * words.length)])); // 
 
 // Start game function
 function startGame() {
-    let randomIndex = Math.floor(Math.random() * words.length);
-    let chosenWord = words[randomIndex]; // Pick a random word
-    let scrambledWord = scrambleWords(chosenWord); // Scramble it
+    let randomIndex = Math.floor(Math.random() * words.length);  // Generate a random index between 0 and words.length - 1 to select a word from the array.
 
-    alert(`Can you unscramble this word: ${scrambledWord}`);
+    let chosenWord = words[randomIndex]; // Pick a random word according to the number we got in random index for example If words = ["apple", "water", "elephant", "racecar", "drums", "phone"], let chosenWord = words[4]; // "drums"
+    let scrambledWord = scrambleWords(chosenWord); // Scrambles the word with the function we created earlier, example output: "sdrum"
 
-    let userInput = window.prompt(`Current Word : ${scrambledWord}, What word do you think it might be? 👀`);
+    alert(`Can you unscramble this word: ${scrambledWord}`); //Using alert to display the scrambled word
 
-    if (userInput) { // If the user wrote something
+    let userInput = window.prompt(`Current Word : ${scrambledWord}, What word do you think it might be? 👀`); // prompt that shows after the alert where the user can write an input
+
+       //Updates progressText here after user enters a guess
+        progressText.innerText = `Last Guess: ${userInput ? userInput : "None"}`;
+
+    if (userInput) { // Check if the user provided an input and prevents empty answers or canceling.
         if (userInput.toLowerCase() === chosenWord) { // Compare with original
             alert("You guessed the word right! ✅");
         } else {
             alert("Wrong Answer!");
         }
     } else {
-        alert("You didn’t write anything!");
+        alert("You didn’t write anything!"); // returns if the first if statement is false
     }
 }
